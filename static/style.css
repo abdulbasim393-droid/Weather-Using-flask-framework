@@ -1,0 +1,499 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --glass: rgba(255,255,255,0.15);
+    --glass-border: rgba(255,255,255,0.2);
+    --text: #ffffff;
+    --shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    transition: all 0.8s ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================
+   WEATHER THEMES
+========================= */
+
+body.default {
+    background:
+        linear-gradient(
+            135deg,
+            #4facfe 0%,
+            #00f2fe 100%
+        );
+}
+
+body.warm {
+    background:
+        linear-gradient(
+            135deg,
+            #ff9966,
+            #ff5e62
+        );
+}
+
+body.rainy {
+    background:
+        linear-gradient(
+            135deg,
+            #1f2937,
+            #4b6cb7
+        );
+}
+
+body.cloudy {
+    background:
+        linear-gradient(
+            135deg,
+            #8e9eab,
+            #eef2f3
+        );
+}
+
+body.snowy {
+    background:
+        linear-gradient(
+            135deg,
+            #dfe9f3,
+            #ffffff
+        );
+}
+
+/* =========================
+   FLOATING BLOBS
+========================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    z-index: -1;
+}
+
+body::before {
+    width: 400px;
+    height: 400px;
+    background: white;
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 500px;
+    height: 500px;
+    background: #ffffff;
+    bottom: -150px;
+    right: -150px;
+}
+
+/* =========================
+   APP CONTAINER
+========================= */
+
+.app-shell {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 25px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: -2px;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 1rem;
+    opacity: 0.85;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    width: 400px;
+    max-width: 100%;
+    padding: 18px 22px;
+    border-radius: 50px;
+
+    border: 1px solid var(--glass-border);
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-form input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.search-form input:focus {
+    background: rgba(255,255,255,0.2);
+}
+
+.search-form button {
+    padding: 18px 24px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.18);
+
+    backdrop-filter: blur(20px);
+
+    color: white;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.search-form button:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.25);
+}
+
+/* =========================
+   MAP
+========================= */
+
+#map {
+    height: 350px !important;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 30px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+    max-width: 600px;
+    margin: 20px auto;
+
+    text-align: center;
+
+    padding: 16px;
+
+    border-radius: 20px;
+
+    background: rgba(255,0,0,0.15);
+
+    color: white;
+
+    backdrop-filter: blur(20px);
+}
+
+/* =========================
+   CURRENT WEATHER CARD
+========================= */
+
+.current-weather {
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    border-radius: 40px;
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    color: white;
+
+    box-shadow: var(--shadow);
+}
+
+/* =========================
+   CITY
+========================= */
+
+.current-weather h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+/* =========================
+   CONDITION
+========================= */
+
+.condition {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    opacity: 0.95;
+}
+
+/* =========================
+   TEMP HERO
+========================= */
+
+.temp-big {
+    font-size: 8rem;
+    font-weight: 200;
+    line-height: 1;
+    margin-top: 20px;
+}
+
+/* =========================
+   EXTRA WEATHER DETAILS
+========================= */
+
+.extra {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.extra p {
+    background: rgba(255,255,255,0.1);
+
+    padding: 12px 18px;
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* =========================
+   FORECAST SECTION
+========================= */
+
+.forecast-panel {
+    margin-top: 35px;
+}
+
+.forecast-panel h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+/* =========================
+   FORECAST SCROLL
+========================= */
+
+.forecast {
+    display: flex;
+    gap: 16px;
+
+    overflow-x: auto;
+
+    padding-bottom: 10px;
+
+    scrollbar-width: none;
+}
+
+.forecast::-webkit-scrollbar {
+    display: none;
+}
+
+/* =========================
+   FORECAST CARD
+========================= */
+
+.card {
+    min-width: 150px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(20px);
+
+    border-radius: 28px;
+
+    padding: 20px;
+
+    color: white;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    transition: 0.3s ease;
+
+    box-shadow: var(--shadow);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.hour {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-weight: 600;
+}
+
+.date {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.card-temp {
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin: 15px 0;
+}
+
+/* =========================
+   WEATHER ICON
+========================= */
+
+.weather-icon {
+    font-size: 5rem;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.current-weather,
+.card,
+.search-form input,
+.search-form button,
+#map {
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 3rem;
+    }
+
+    .temp-big {
+        font-size: 5rem;
+    }
+
+    .current-weather {
+        padding: 35px 20px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form input {
+        width: 100%;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+    .card {
+        min-width: 130px;
+    }
+
+    #map {
+        height: 250px !important;
+    }
+}
+
+
+
+.recent-searches {
+    margin: 20px 0 30px;
+    text-align: center;
+    color: white;
+}
+
+.recent-searches h3 {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#recent-cities {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.city-chip {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+
+    color: white;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.city-chip:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+}
