@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = SECRET_KEY
 
 
+
 def choose_theme(weather):
     if not weather:
         return "default"
@@ -37,6 +38,7 @@ def update_recent_cities(city):
     cities = [existing for existing in cities if existing.lower() != city.lower()]
     cities.insert(0, city)
     session["recent_cities"] = cities[:5]
+
 
 
 @app.route("/", methods=["GET", "POST"])
